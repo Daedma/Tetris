@@ -106,7 +106,7 @@ void render(std::shared_ptr<Shape> shape, Field* const field)
 	}
 }
 
-void faller(std::shared_ptr<Shape> shape, bool& flag)
+void faller(Shape* shape, bool& flag)
 {
 	while (flag)
 	{
@@ -148,13 +148,13 @@ void multi_game()
 {
 	Field fld(10, 20, 15);
 	fld.draw();
-	std::shared_ptr<Shape> shp(rand_shape(&fld));
+	std::unique_ptr<Shape> shp(rand_shape(&fld));
 	while (true)
 	{
 		bool flag = true;
-		std::shared_ptr<Shape> next_shp(rand_shape(&fld));
+		std::unique_ptr<Shape> next_shp(rand_shape(&fld));
 		fld.draw_next_shape(next_shp.get());
-		std::thread drop(faller, shp, std::ref(flag));
+		std::thread drop(faller, shp.get(), std::ref(flag));
 		while (flag)
 		{
 			if (_kbhit())
@@ -194,7 +194,7 @@ void multi_game()
 			}
 		}
 		drop.join();
-		shp = next_shp;
+		shp = std::move(next_shp);
 		fs.wash();
 		auto score = fs.clear_tier(fld.get_width());
 		fld.augment_score(score);

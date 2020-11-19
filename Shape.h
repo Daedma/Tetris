@@ -30,6 +30,10 @@ protected:
 public:
 	Shape(WORD, Falling_shapes* const, Field* const, std::initializer_list<COORD>);
 	virtual ~Shape() { sh->add(body); }
+	Shape(const Shape&) = default;
+	Shape& operator=(const Shape&);
+	Shape(Shape&&) noexcept;
+	Shape& operator=(Shape&&) noexcept;
 	void draw() { body.draw(); }
 	void draw(SHORT x, SHORT y) { body.draw(x, y); }
 	void clear() { body.clear(); }

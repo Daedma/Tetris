@@ -9,7 +9,7 @@
 #define FIELD_BEGIN_X BEGIN_X
 #define FIELD_BEGIN_Y BEGIN_Y
 #define INITIAL_SPEED 350
-#define SPEED_MULTIPIER 0.2
+#define SPEED_MULTIPIER 0.1
 //коды клавиш
 #define KEY_ARROW_UP 72
 #define KEY_ARROW_RIGHT 77

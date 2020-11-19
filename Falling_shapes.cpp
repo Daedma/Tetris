@@ -54,7 +54,7 @@ size_t Falling_shapes::clear_tier(size_t width)
 			++it;
 	}
 	rebuild();
-	return pow(count, 2);
+	return static_cast<size_t>(pow(count, 2));
 }
 
 void Falling_shapes::clear()

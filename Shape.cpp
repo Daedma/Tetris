@@ -5,6 +5,28 @@ double Shape::speed = 0.4;
 Shape::Shape(WORD color, Falling_shapes* const falling_shapes_ptr, Field* const field_ptr, std::initializer_list<COORD> _lst) :
 	sh(falling_shapes_ptr), body(color, _lst), field(field_ptr), pos(Position::POS1) {}
 
+Shape& Shape::operator=(const Shape& rhs)
+{
+	sh->add(body);
+	body = rhs.body;
+	pos = rhs.pos;
+	return *this;
+}
+
+Shape::Shape(Shape&& rhs) noexcept:
+	sh(rhs.sh), body(rhs.body), pos(rhs.pos), field(rhs.field)
+{
+	sh->add(body);
+}
+
+Shape& Shape::operator=(Shape&& rhs) noexcept
+{
+	sh->add(body);
+	body = rhs.body;
+	pos = rhs.pos;
+	return *this;
+}
+
 bool Shape::fall()
 {
 	auto tmp = body;

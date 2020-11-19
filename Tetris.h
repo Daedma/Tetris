@@ -12,7 +12,7 @@ Shape* rand_shape(Field* const, Falling_shapes* const = &fs);
 void game();
 void multi_game();
 void render(std::shared_ptr<Shape>, Field* const);
-void faller(std::shared_ptr<Shape>, bool&);
+void faller(Shape*, bool&);
 void logic(std::shared_ptr<Shape>);
 
 extern std::mutex mtx1;
